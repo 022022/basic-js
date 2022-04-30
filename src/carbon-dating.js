@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 const MODERN_ACTIVITY = 15;
 const HALF_LIFE_PERIOD = 5730;
@@ -18,23 +18,23 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
+  let sampleActivityNum = +sampleActivity;
 
-    let sampleActivityNum = +sampleActivity;
+  if (
+    typeof sampleActivity === "string" &&
+    sampleActivityNum &&
+    sampleActivityNum > 0 &&
+    sampleActivityNum < 15
+  ) {
+    const ln2 = 0.693;
+    const activityProportion = MODERN_ACTIVITY / +sampleActivity;
 
-    if (typeof(sampleActivity) === 'string' && sampleActivityNum && sampleActivityNum > 0 && sampleActivityNum < 15){
-        const ln2 = 0.693;
-        const activityProportion = MODERN_ACTIVITY / (+sampleActivity);
-
-        return Math.ceil(Math.log(activityProportion) / (ln2 / HALF_LIFE_PERIOD));
-    }
-
-    else {
-        return false;
-    }
-
-
+    return Math.ceil(Math.log(activityProportion) / (ln2 / HALF_LIFE_PERIOD));
+  } else {
+    return false;
+  }
 }
 
 module.exports = {
-  dateSample
+  dateSample,
 };
